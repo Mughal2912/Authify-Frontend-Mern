@@ -16,7 +16,7 @@ export const registerUser = createAsyncThunk(
 
     try {
       const { data } = await axios.post(
-        "/api/v1/users/register",
+        `${import.meta.env.VITE_API_URL}/v1/users/register`,
         userData,
         config
       );
@@ -40,7 +40,7 @@ export const verifyUser = createAsyncThunk(
     try {
       /*making api call with axios for sending user data and picking response from backend */
       const { data } = await axios.post(
-        "/api/v1/users/opt-verification",
+        `${import.meta.env.VITE_API_URL}/v1/users/opt-verification`,
         userData,
         config
       );
@@ -65,7 +65,7 @@ export const userLogin = createAsyncThunk(
 
     try {
       const { data } = await axios.post(
-        "/api/v1/users/login",
+        `${import.meta.env.VITE_API_URL}/v1/users/login`,
         userData,
         config
       );
@@ -85,7 +85,9 @@ export const userLogOut = createAsyncThunk("user/logOut", async () => {
   // console.log(userData);
 
   try {
-    const { data } = await axios.get("/api/v1/users/logout");
+    const { data } = await axios.get(
+      `${import.meta.env.VITE_API_URL}/v1/users/logout`
+    );
     // console.log(data?.data);
     // console.log(response);
 
@@ -100,7 +102,9 @@ export const loadUser = createAsyncThunk(
   "user/loadUser",
   async (_, { rejectWithValue }) => {
     try {
-      const { data } = await axios.get("/api/v1/users/me"); // secure route to get current user
+      const { data } = await axios.get(
+        `${import.meta.env.VITE_API_URL}/v1/users/me`
+      ); // secure route to get current user
       // console.log(data);
 
       return data;
@@ -117,7 +121,7 @@ export const updateUserProfile = createAsyncThunk(
   async (userData, { rejectWithValue }) => {
     try {
       const { data } = await axios.put(
-        "/api/v1/users/me/profile/update",
+        `${import.meta.env.VITE_API_URL}/v1/users/me/profile/update`,
         userData,
         config
       );
@@ -140,7 +144,7 @@ export const changeUserPassword = createAsyncThunk(
   async (userData, { rejectWithValue }) => {
     try {
       const { data } = await axios.put(
-        "/api/v1/users/me/password/update",
+        `${import.meta.env.VITE_API_URL}/v1/users/me/password/update`,
         userData,
         config
       );
@@ -165,7 +169,7 @@ export const forgotPassword = createAsyncThunk(
 
     try {
       const { data } = await axios.post(
-        "/api/v1/users/user/password/forgot",
+        `${import.meta.env.VITE_API_URL}/v1/users/user/password/forgot`,
         { email },
         config
       );
@@ -196,7 +200,9 @@ export const resetPassword = createAsyncThunk(
 
     try {
       const { data } = await axios.post(
-        `/api/v1/users/user/password/reset/${userData?.token}`,
+        `${import.meta.env.VITE_API_URL}/v1/users/user/password/reset/${
+          userData?.token
+        }`,
         newData,
         config
       );
@@ -222,7 +228,7 @@ export const userDelete = createAsyncThunk(
     try {
       /*making api call with axios for getting user details from backend */
       const { data } = await axios.delete(
-        "/api/v1/users/me/delete/account",
+        `${import.meta.env.VITE_API_URL}/v1/users/me/delete/account`,
         imageId,
         config
       );
