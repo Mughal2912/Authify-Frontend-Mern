@@ -79,10 +79,7 @@ export default function App() {
   const isFetchedRef = useRef(false);
 
   useEffect(() => {
-    if (!isFetchedRef.current) {
-      isFetchedRef.current = true;
-      Dispatch(loadUser());
-    }
+    Dispatch(loadUser());
   }, []);
   return (
     <div className="bg-light text-dark min-h-screen relative w-[100%]">

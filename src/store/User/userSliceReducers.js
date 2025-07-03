@@ -12,7 +12,7 @@ const config = {
 export const registerUser = createAsyncThunk(
   "user/register",
   async (userData, { rejectWithValue }) => {
-    // console.log(userData);
+    console.log(import.meta.env.VITE_API_URL);
 
     try {
       const { data } = await axios.post(
@@ -69,7 +69,7 @@ export const userLogin = createAsyncThunk(
         userData,
         config
       );
-      // console.log(data);
+      console.log(data);
 
       return data;
     } catch (error) {
@@ -103,12 +103,17 @@ export const loadUser = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       const { data } = await axios.get(
-        `${import.meta.env.VITE_API_URL}/v1/users/me`
+        `${import.meta.env.VITE_API_URL}/v1/users/me`,
+        {
+          withCredentials: true,
+        }
       ); // secure route to get current user
-      // console.log(data);
+      console.log(data);
 
       return data;
     } catch (error) {
+      console.log(error);
+
       return rejectWithValue(
         error.response.data.message || error.message || "Could not load user"
       );
